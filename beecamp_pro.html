@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BEE CAMP 2026 - Pre-iscrizione</title>
+<style>
+/* BASE */
+body { font-family:'Segoe UI', sans-serif; background:linear-gradient(135deg,#1e3a5f,#4fc3f7); margin:0; color:#333; }
+.container { max-width:700px; margin:30px auto; background:white; padding:25px; border-radius:15px; box-shadow:0 10px 30px rgba(0,0,0,0.2); position:relative; }
+h1,h2 { color:#1e3a5f; text-align:center; }
+.steps { display:none; }
+.steps.active { display:block; }
+button { width:100%; padding:15px; background:linear-gradient(135deg,#ffb300,#ff6f00); color:white; border:none; border-radius:10px; font-size:18px; cursor:pointer; margin-top:15px; }
+button:hover { transform: scale(1.03); }
+.grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+input, textarea { width:100%; padding:10px; margin-top:5px; border-radius:6px; border:1px solid #ccc; }
+textarea { resize:none; }
+
+/* LOGO */
+.logo { display:block; margin:0 auto 20px; max-height:80px; }
+
+/* CHECKBOX CARD SETTIMANE */
+.weeks { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:12px; }
+.weeks label { display:flex; align-items:center; gap:10px; background:#e0f7fa; border-radius:12px; padding:12px; cursor:pointer; transition:transform 0.2s, box-shadow 0.2s; box-shadow:0 2px 6px rgba(0,0,0,0.15); }
+.weeks label:hover { transform:translateY(-2px); box-shadow:0 4px 12px rgba(0,0,0,0.25); }
+.weeks input[type=checkbox] { width:18px; height:18px; }
+
+/* CHECKBOX STANDARD */
+label { display:flex; align-items:center; gap:8px; cursor:pointer; }
+.notice { background:#fff8e1; padding:12px; border-left:5px solid #ffc107; margin-bottom:15px; border-radius:5px; font-size:14px; }
+.error-msg { color:#d32f2f; font-size:14px; margin-top:8px; display:none; }
+
+/* RINGRAZIAMENTO */
+.thankyou { display:none; text-align:center; color:white; padding:50px 20px; }
+.thankyou h2 { font-size:26px; margin-bottom:20px; }
+
+@media(max-width:600px){ .grid, .weeks { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+
+<div class="container">
+<img src="logo.png" alt="LE API AZZURRE ASD" class="logo">
+
+<h1>BEE CAMP 2026</h1>
+<p style="text-align:center; font-size:14px; opacity:0.8;">Pre-iscrizione - LE API AZZURRE ASD</p>
+
+<form id="multiStepForm">
+<input type="hidden" name="_subject" value="Nuova pre-iscrizione BEE CAMP 2026">
+
+<!-- STEP 1 -->
+<div class="steps active" id="step1">
+  <img src="logo.png" class="logo">
+  <div class="notice">⚠️ Questa è una <b>pre-iscrizione</b>. Conferma solo dopo pagamento.</div>
+  <h2>📄 Regolamento</h2>
+  <p><a href="regolamento.pdf" target="_blank"><b>Scarica il regolamento</b></a></p>
+  <label><input type="checkbox" required> Accetto il regolamento</label>
+
+  <h2>📅 Seleziona settimane</h2>
+  <div class="weeks">
+    <label><input type="checkbox" name="settimane[]" value="1 (8-12 giugno)"> Settimana 1 (8-12 giugno)</label>
+    <label><input type="checkbox" name="settimane[]" value="2 (15-19 giugno)"> Settimana 2 (15-19 giugno)</label>
+    <label><input type="checkbox" name="settimane[]" value="3 (22-26 giugno)"> Settimana 3 (22-26 giugno)</label>
+    <label><input type="checkbox" name="settimane[]" value="4 (29 giu - 3 lug)"> Settimana 4 (29 giu – 3 lug)</label>
+    <label><input type="checkbox" name="settimane[]" value="5 (6-10 luglio)"> Settimana 5 (6-10 luglio)</label>
+    <label><input type="checkbox" name="settimane[]" value="6 (13-17 luglio)"> Settimana 6 (13-17 luglio)</label>
+    <label><input type="checkbox" name="settimane[]" value="7 (20-24 luglio)"> Settimana 7 (20-24 luglio)</label>
+    <label><input type="checkbox" name="settimane[]" value="8 (27-31 luglio)"> Settimana 8 (27-31 luglio)</label>
+    <label><input type="checkbox" name="settimane[]" value="9 (3-7 agosto)"> Settimana 9 (3-7 agosto)</label>
+    <label><input type="checkbox" name="settimane[]" value="10 (10-14 agosto)"> Settimana 10 (10-14 agosto)</label>
+    <label><input type="checkbox" name="settimane[]" value="11 (17-21 agosto)"> Settimana 11 (17-21 agosto)</label>
+    <label><input type="checkbox" name="settimane[]" value="12 (24-28 agosto)"> Settimana 12 (24-28 agosto)</label>
+    <label><input type="checkbox" name="settimane[]" value="13 (31 ago - 4 set)"> Settimana 13 (31 ago – 4 set)</label>
+    <label><input type="checkbox" name="settimane[]" value="14 (7-11 settembre)"> Settimana 14 (7-11 settembre)</label>
+  </div>
+  <button type="button" onclick="nextStep(1)">➡️ Avanti</button>
+</div>
+
+<!-- STEP 2 -->
+<div class="steps" id="step2">
+  <img src="logo.png" class="logo">
+  <h2>👶 Dati minore</h2>
+  <div class="grid">
+    <input type="text" name="nome_minore" placeholder="Nome" required>
+    <input type="text" name="cognome_minore" placeholder="Cognome" required>
+    <input type="date" name="data_nascita" required>
+    <input type="text" name="codice_fiscale" placeholder="Codice Fiscale" required>
+  </div>
+  <textarea name="indirizzo_minore" placeholder="Indirizzo completo (via, città, provincia, CAP)" required></textarea>
+  <label><input type="checkbox" name="tesserato"> Già tesserato LE API AZZURRE ASD</label>
+  <button type="button" onclick="nextStep(2)">➡️ Avanti</button>
+</div>
+
+<!-- STEP 3 -->
+<div class="steps" id="step3">
+  <img src="logo.png" class="logo">
+  <h2>👨‍👩‍👧 Dati genitore</h2>
+  <div class="grid">
+    <input type="text" name="nome_genitore" placeholder="Nome" required>
+    <input type="text" name="cognome_genitore" placeholder="Cognome" required>
+    <input type="text" name="documento" placeholder="Documento" required>
+    <input type="tel" name="telefono" placeholder="Telefono" required>
+    <input type="email" name="email" placeholder="Email" required>
+  </div>
+  <label><input type="checkbox" required> Accetto la privacy</label>
+  <button type="submit">🚀 Invia pre-iscrizione</button>
+</div>
+
+</form>
+
+<!-- RINGRAZIAMENTO -->
+<div class="thankyou" id="thankYouMessage">
+  <img src="logo.png" class="logo">
+  <h2>✅ Pre-iscrizione ricevuta!</h2>
+  <p>Grazie per aver completato la pre-iscrizione al <b>BEE CAMP 2026</b> di LE API AZZURRE ASD.</p>
+  <p>Riceverai presto una email di conferma con le istruzioni per completare l’iscrizione tramite pagamento.</p>
+</div>
+
+<script>
+// STEP NAVIGATION + VALIDAZIONE
+let currentStep=1;
+function nextStep(step){
+  const currentDiv=document.getElementById('step'+step);
+  const requiredFields=currentDiv.querySelectorAll('[required]');
+  let valid=true;
+  const existingError=currentDiv.querySelector('.error-msg');
+  if(existingError) existingError.remove();
+
+  requiredFields.forEach(f=>{
+    if((f.type==='checkbox' && !f.checked) || (f.type!=='checkbox' && !f.value.trim())){
+      valid=false;
+    }
+  });
+
+  if(!valid){
+    const msg=document.createElement('div');
+    msg.className='error-msg';
+    msg.innerText='❗ Compila tutti i campi obbligatori prima di proseguire.';
+    currentDiv.appendChild(msg);
+    return;
+  }
+
+  currentDiv.classList.remove('active');
+  const nextDiv=document.getElementById('step'+(step+1));
+  nextDiv.classList.add('active');
+}
+
+// AJAX FORMSPREE
+const form=document.getElementById('multiStepForm');
+form.addEventListener('submit',function(e){
+  e.preventDefault();
+  const data=new FormData(form);
+  fetch('https://formspree.io/f/xwvwkgee',{
+    method:'POST', body:data, headers:{'Accept':'application/json'}
+  }).then(response=>{
+    if(response.ok){
+      form.style.display='none';
+      document.getElementById('thankYouMessage').style.display='block';
+    } else { alert('Errore invio form. Riprova.'); }
+  }).catch(()=>alert('Errore di rete.'));
+});
+</script>
+
+</div>
+</body>
+</html>
